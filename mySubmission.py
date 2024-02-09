@@ -38,6 +38,7 @@ def assign_loads(loads):
 
         while remaining_loads:
             # Looping the till the current driver is over time 
+            # Find the nearest load as next load
             next_load = min(remaining_loads, key=lambda load: distance(current_location, load[1]))
             trip_time = distance(current_location, next_load[1])+ distance(next_load[1], next_load[2])
             return_time = distance(next_load[2], depot)  # Time for returning to the depot
