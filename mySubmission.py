@@ -1,6 +1,10 @@
 import math
 import sys
 
+# To run the code with problem set simply run: python mySubmission.py {./path/to/problem}
+# For example: python mySubmission.py ./trainingProblems/problem1.txt
+# For evaluation run: python3 evaluateShared.py --cmd "python3 mySubmission.py" --problemDir trainingProblems
+
 def distance(p1, p2):
     # Calculate the distance (time)
     return math.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
@@ -17,7 +21,6 @@ def read_loads(file_path):
             dropoff = tuple(map(float, parts[2].strip("()").split(',')))
             loads.append((load_number, pickup, dropoff))
     return loads
-
 
 def assign_loads(loads):
     # Assign the load to drivers based on the distance
@@ -36,7 +39,7 @@ def assign_loads(loads):
             # Looping the till the current driver is over time 
             next_load = min(remaining_loads, key=lambda load: distance(current_location, load[1]))
             trip_time = distance(current_location, next_load[1])+ distance(next_load[1], next_load[2])
-            return_time = distance(next_load[2], depot)  # Time to return to depot
+            return_time = distance(next_load[2], depot)  # Time for returning to the depot
 
             if (total_drive_time + trip_time + return_time) <= (max_time):
                 # If not overtime update location and time
@@ -64,15 +67,13 @@ def assign_loads(loads):
 
     return assignments
 
-
 def main(file_path):
     loads = read_loads(file_path)
     assignments = assign_loads(loads)
     
-    # Print the route of all the driers
+    # Print the route of all the drivers
     for route in assignments:
         print(route)
-
 
 
 
