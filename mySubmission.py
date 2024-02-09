@@ -4,6 +4,7 @@ import sys
 # To run the code with problem set simply run: python mySubmission.py {./path/to/problem}
 # For example: python mySubmission.py ./trainingProblems/problem1.txt
 # For evaluation run: python3 evaluateShared.py --cmd "python3 mySubmission.py" --problemDir trainingProblems
+# Training Set Mean Cost: 48941.53  Mean Run Time: 60.29ms
 
 def distance(p1, p2):
     # Calculate the distance (time)
