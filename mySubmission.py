@@ -45,6 +45,16 @@ def assign_loads(loads):
                 driver_loads.append(next_load[0])
                 remaining_loads.remove(next_load)
             else:
+                # See if potential load can add on the way back
+                for potential_load in remaining_loads:
+                    extra_trip_time = distance(current_location, potential_load[1]) + distance(potential_load[1], potential_load[2])
+                    extra_return_time = distance(potential_load[2], depot)
+                    if (total_drive_time + extra_trip_time + extra_return_time) <= (max_time):
+                        total_drive_time += extra_trip_time
+                        current_location = potential_load[2]
+                        driver_loads.append(potential_load[0])
+                        remaining_loads.remove(potential_load)
+                        break 
                 break  # This driver over time next one 
 
         if driver_loads:
